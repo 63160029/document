@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+    <title>บุคลากร</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,11 +11,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1><a href='newstaff.php'><span class='glyphicon glyphicon-user'></span></a> <b>|<b> บุคคลากร</h1>
-        <form action="#" method="post">
-            <input type="text" name="kw" placeholder="Enter staff name" value="">
-            <input type="submit">
+    <div  align =center class="container">
+        <h1><a href='document.php'><span class='glyphicon glyphicon-home'></span></a></h1>
+        <h1 align =center><b>คณะกรรมการ</h1>
+        <h2 align =center>รายชื่อคณะกรรมการ </h2>
+    <h3 align =center>เพิ่มรายชื่อ | <a href='newstaff.php'><span class='glyphicon glyphicon-plus'></span></a></h3>
+        <form  align =center action="#" method="post">
+            <input type="text" name="kw" placeholder="Enter staff name" value="" size=140>
+            <button type="submit" class="glyphicon glyphicon-search btn btn-info"></button>
         </form>
 
         <?php
@@ -71,6 +74,7 @@
         }
         ?>
     </div>
+    
 </body>
 
 </html>

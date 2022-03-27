@@ -11,10 +11,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1><a href='newdocument.php'><span class='glyphicon glyphicon-folder-open'></span></a> <b>|<b> คำสั่งแต่งตั้ง</h1>
-            <input type="text" name="kw" placeholder="Enter document name" value="">
-            <input type="submit">
+    <div align =center class="container">
+    <h1 align =center><b>คำสั่งแต่งตั้ง</h1>
+    <h2 align =right>รายการคำสั่งแต่งตั้ง &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='newdocument.php'><span class='glyphicon glyphicon-plus'></span></a>
+    <a href='staff.php'><span class='glyphicon glyphicon-user'></span></a>
+    <a href='selectdocument.php'><span class='glyphicon glyphicon-search'></span></a></h2>
+        <form align =center action="#" method="post">
+            <input type="text" name="kw" placeholder="Enter document name" value="" size=140>
+            <button type="submit" class="glyphicon glyphicon-search btn btn-info"></button>
         </form>
 
         <?php
@@ -33,10 +37,9 @@
         $result = $stmt->get_result();
         
         if ($result->num_rows == 0) {
-            echo "Not found!";
+            echo  "Not found!";
         } else {
             echo "Found " . $result->num_rows . " record(s).";
-            // สร้างตัวแปรเพื่อเก็บข้อความ html 
             $table = "<table class='table table-hover'>
                         <thead>
                             <tr>
@@ -53,29 +56,30 @@
                         </thead>
                         <tbody>";
                         
-            // 
+             
             $i = 1; 
 
-            // ดึงข้อมูลออกมาทีละแถว และกำหนดให้ตัวแปร row 
             while($row = $result->fetch_object()){ 
                 $table.= "<tr>";
                 $table.= "<td>" . $i++ . "</td>";
-                $table.= "<td>$row->doc_num</td>";
+                $table.= "<td>$row->doc_num &emsp;</td>";
                 $table.= "<td>$row->doc_title</td>";
                 $table.= "<td>$row->doc_start_date</td>";
                 $table.= "<td>$row->doc_to_date</td>";
                 $table.= "<td>$row->doc_status</td>";
-                $table.= "<td>$row->doc_file_name</td>";
+                $table.= "<td><a href='uploads/$row->doc_file_name'>$row->doc_file_name</a></td>";
                 $table.= "<td>";
-                $table.= "<a href='editdocument.php?id=$row->id'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+                $table.= "<a href='editdocument.php?id=$row->id'>&emsp;&emsp;&emsp;&emsp;&emsp;<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
                 $table.= " | ";
                 $table.= "<a href='deletedocument.php?id=$row->id'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
                 $table.= "</td>";
                 $table.= "<td>";
-                $table.= "<a href='staff.php?id=$row->id'><span class='glyphicon glyphicon-th-list' aria-hidden='true'></span></a>";
+                $table.= "<a href='addstafftodocument.php?id=$row->id'>&emsp;&emsp;&emsp;&emsp;&emsp;<span class='glyphicon glyphicon-user' aria-hidden='true' ></span></a>";
                 $table.= "</td>";
                 $table.= "</tr>";
             }
+
+            
 
             $table.= "</tbody>";
             $table.= "</table>";
