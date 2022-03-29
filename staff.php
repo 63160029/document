@@ -1,3 +1,11 @@
+<?php
+session_start();
+echo "Welcome ".$_SESSION['stf_name'];
+
+if(!isset($_SESSION['loggedin'])){
+    header("location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +19,14 @@
 </head>
 
 <body>
-    <div  align =center class="container">
-        <h1><a href='document.php'><span class='glyphicon glyphicon-home'></span></a></h1>
-        <h1 align =center><b>คณะกรรมการ</h1>
-        <h2 align =center>รายชื่อคณะกรรมการ </h2>
-    <h3 align =center>เพิ่มรายชื่อ | <a href='newstaff.php'><span class='glyphicon glyphicon-plus'></span></a></h3>
-        <form  align =center action="#" method="post">
-            <input type="text" name="kw" placeholder="Enter staff name" value="" size=140>
-            <button type="submit" class="glyphicon glyphicon-search btn btn-info"></button>
+    <div align =center class="container">
+    <h1 align =center style='color:#35589A;'><b>คณะกรรมการ |</b>
+    <a href='document.php'><span class='glyphicon glyphicon-home' style='color:#FF5733;'></span></a></h1>
+    <h2 align =center style='color:#35589A;'><b>รายชื่อบุคลากร</b> &nbsp;</h2>
+    <h3 align =center style='color:#35589A;'><b>เพิ่มรายชื่อ | </b><a href='newstaff.php'><span class='glyphicon glyphicon-plus' style='color:#FF5733;'></span></a></h3>
+        <form align =center action="#" method="post">
+            <input type="text" name="kw" placeholder="Enter staff name"  value="" size=140 >
+            <input type="submit"  class="glyphicon glyphicon-search btn btn-info">
         </form>
 
         <?php
@@ -43,10 +51,10 @@
             $table = "<table class='table table-hover'>
                         <thead>
                             <tr>
-                                <th scope='col'>#</th>
-                                <th scope='col'>รหัสพนักงาน</th>
-                                <th scope='col'>ชื่อ-นามสกุล</th>
-                                <th scope='col'></th>
+                                <th scope='col' style='color:#35589A;'>#</th>
+                                <th scope='col' style='color:#35589A;'>รหัสพนักงาน</th>
+                                <th scope='col' style='color:#35589A;'>ชื่อ-นามสกุล</th>
+                                <th scope='col' style='color:#35589A;'></th></b>
                             </tr>
                         </thead>
                         <tbody>";
@@ -56,9 +64,9 @@
 
             while($row = $result->fetch_object()){ 
                 $table.= "<tr>";
-                $table.= "<td>" . $i++ . "</td>";
-                $table.= "<td>$row->stf_code</td>";
-                $table.= "<td>$row->stf_name</td>";
+                $table.= "<td >" . $i++ . "</td>";
+                $table.= "<td style='color:#35589A;'>$row->stf_code</td>";
+                $table.= "<td style='color:#35589A;'>$row->stf_name</td>";
                 $table.= "<td>";
                 $table.= "<a href='editstaff.php?id=$row->id'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
                 $table.= " | ";

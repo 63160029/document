@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['loggedin'])){
+    header("location: login.php");
+}
 require_once("dbconfig.php");
 
 if ($_POST){
@@ -27,6 +31,7 @@ if ($_POST){
     }
     
     header("location: document.php");
+
 } else {
     $doc_id = $_GET['id'];
     $sql = "SELECT *
@@ -51,14 +56,29 @@ if ($_POST){
 }
 ?>
 
-<form action="addstafftodocument.php" method="post">
-    <input type="hidden" name="id" value="<?php echo $doc_id; ?>">
-    <?php
-    while($row = $result->fetch_object()){ ?>
-    <div class="checkbox">
-        <label><input type="checkbox" name="staff_id[]" <?php if ($row->doc_id <> null) echo "checked";?>
-                value="<?php echo $row->id; ?>"><?php echo $row->stf_name; ?></label>
-    </div>
-    <?php } ?>
-    <input type="submit">
-</form>
+<body>
+    <form action="addstafftodocument.php" method="post" >
+    <br>
+        <div class="form-group">
+        <input  type="hidden" name="id"  value=" <?php echo $doc_id; ?>">
+        <?php
+        while($row = $result->fetch_object()){ ?>
+        <h3>
+            <div class="checkbox" >
+                <label >&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    &emsp;&emsp;&emsp;&emsp;&emsp;
+
+                </label>
+                <input type="checkbox" name="staff_id[]" class="form-control"  <?php if ($row->doc_id <> null) echo "checked";?>
+                value="<?php echo $row->id; ?>"><?php echo $row->stf_name; ?>
+            </div>
+
+        </h3>
+        <?php } ?>
+        <br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <button type="submit" ><h3><b>&emsp;&emsp;ส่ง&emsp;&emsp;</b></h3></button>
+        
+    </form>
+</body>
